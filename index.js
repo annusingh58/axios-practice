@@ -3,6 +3,8 @@ import morgan from "morgan";
 import mongoose from "mongoose";
 import session from "express-session";
 import dotenv from "dotenv";
+import cors from "cors";
+import router from "./routes/userroutes.js"
 
 const app =express();
 dotenv.config();

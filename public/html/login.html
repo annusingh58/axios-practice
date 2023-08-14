@@ -6,11 +6,41 @@
     <title>login</title>
 </head>
 <body>
-    <form>
+    <form onsubmit="login(event)">
         <label>email</label></br>
         <input id="email" type="email" placeholder="enter your email"/></br></br>
         <label>password</label></br>
         <input id="password" type="password" placeholder="enter your password"/></br></br>
+        <input type="submit" value ="login"/>
     </form>
+    <script>
+        async function login(event){
+            event.preventDefault();
+
+            let email =document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            const data =await fetch("http://localhost:2000/axios/login",
+            {
+                method :'POST',
+                headers:{
+                    'Content-type':'application/json',
+                },
+                body :JSON.stringify({
+                    email,
+                    password
+                })
+            });
+            const response =await data.json();
+            if(response.status==200){
+                alert(response.message)
+                window.location.href ="/axios/home"
+            }
+            else if(response.status==400){
+                alert (response.message)
+
+            }
+        }
+    </script>
 </body>
 </html>

@@ -18,5 +18,38 @@
         <input type="submit" value="register"/>
 
     </form>
+
+
+    <script>
+         async function register(event){
+            event.preventDefault();
+
+            let username = document.getElementById("username").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let number = document.getElementById("number").value;
+
+
+            let data =await fetch("http:///localhost:2000/axios/register",
+            {
+                method :'POST',
+                headers:{
+                    'Content-type':'application/json',
+                },
+                body:JSON.stringify({
+                    username,email,password,number
+                })
+            });
+
+            const response =await data.json();
+            console.log(response);
+            if(response.status==201){
+                alert(response.message);
+                window.location.href="/axios/login";
+            }
+
+
+         }
+    </script>
 </body>
 </html>
